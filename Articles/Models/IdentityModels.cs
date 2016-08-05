@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
+
+
 namespace Articles.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
@@ -29,5 +31,9 @@ namespace Articles.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Articles.Core.Category> Categories { get; set; }
+        public System.Data.Entity.DbSet<Articles.Core.Tag> Tags { get; set; }
+        public System.Data.Entity.DbSet<Articles.Core.Post> Posts { get; set; }
     }
 }
