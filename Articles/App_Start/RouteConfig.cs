@@ -25,6 +25,11 @@ namespace Articles
     new { controller = "Blog", action = "Category" }
 );
 
+            routes.MapRoute(
+                "Tag",
+                "Tag/{tag}",
+                new { controller = "Blog", action = "Tag" }
+            );
 
             routes.MapRoute(
        "Action",
