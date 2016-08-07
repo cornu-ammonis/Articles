@@ -53,6 +53,14 @@ namespace Articles.Controllers
             return View("List", viewModel);
         }
 
+        public ViewResult Search(string s, int p = 1)
+        {
+            var viewModel = new ListViewModel(_blogRepository, s, "Search", p);
+
+            ViewBag.Title = String.Format(@"{0} posts found for search ""{1}""", viewModel.TotalPosts, s);
+            return View("List", viewModel);
+        }
+
         // GET: Blog
         public ActionResult Index()
         {

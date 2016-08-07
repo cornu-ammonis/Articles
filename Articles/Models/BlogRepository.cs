@@ -80,6 +80,26 @@ namespace Articles.Core
             return posts;
         }
 
+        public IList<Post> PostsForSearch(string search, int pageNo, int pageSize)
+        {
+            List<Post> posts = new List<Post>();
+
+            IEnumerable<Post> post_query =
+                (from p in db.Posts
+                 where p.Published == true
+                 where p.Title.Contains(search) || p.Category.Name.Equals(search) || p.Tags.Any(t => t.Name.Equals(search))
+                 orderby p.PostedOn descending
+                 select p)
+                 .Skip(pageNo * pageSize).Take(pageSize);
+
+            foreach (Post post in post_query)
+            {
+                posts.Add(post);
+            }
+
+            return posts;
+        }
+
         public int TotalPosts()
         {
             int total = 0;
@@ -120,6 +140,24 @@ namespace Articles.Core
             IEnumerable<Post> p_query =
                 from p in db.Posts
                 where p.Published == true && p.Tags.Any(t => t.UrlSlug.Equals(tagSlug))
+                select p;
+
+            foreach (Post post in p_query)
+            {
+                total = total + 1;
+            }
+
+            return total;
+        }
+
+        public int TotalPostsForSearch(string search)
+        {
+            int total = 0;
+
+            IEnumerable<Post> p_query =
+                from p in db.Posts
+                where p.Published == true
+                where p.Title.Contains(search) || p.Category.Name.Equals(search) || p.Tags.Any(t => t.Name.Equals(search))
                 select p;
 
             foreach (Post post in p_query)
