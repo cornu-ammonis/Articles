@@ -41,6 +41,9 @@
         <div id="site_content">
             @Html.Partial("_Search")
             @RenderBody()
+
+            <!--calls a 'child action' which creates a widget view model and returns the sidebar partial view given the model-->
+            @Html.Action("Sidebars")
         </div>
 
         <!-- Footer -->

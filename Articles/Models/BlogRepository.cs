@@ -227,7 +227,23 @@ namespace Articles.Core
                 categories.Add(category);
             }
 
-            return categories; 
+            return categories;
+        }
+
+        public IList<Tag> Tags()
+        {
+            List<Tag> tags = new List<Tag>();
+            IEnumerable<Tag> t_query =
+                from t in db.Tags
+                orderby t.Name
+                select t;
+
+            foreach (Tag tag in t_query)
+            {
+                tags.Add(tag);
+            }
+
+            return tags;
         }
     }
 }
