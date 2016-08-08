@@ -32,6 +32,13 @@ namespace Articles
             );
 
             routes.MapRoute(
+    "Post",
+    "Archive/{year}/{month}/{title}",
+    new { controller = "Blog", action = "Post" }
+);
+
+
+            routes.MapRoute(
        "Action",
        "{action}",
        new { controller = "Blog", action = "Posts" }

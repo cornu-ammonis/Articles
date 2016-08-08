@@ -86,8 +86,8 @@ namespace Articles.Core
 
             IEnumerable<Post> post_query =
                 (from p in db.Posts
-                 where p.Published == true
-                 where p.Title.Contains(search) || p.Category.Name.Equals(search) || p.Tags.Any(t => t.Name.Equals(search))
+                 where p.Published == true &&
+                 ( p.Title.Contains(search) || p.Category.Name.Equals(search) || p.Tags.Any(t => t.Name.Equals(search)))
                  orderby p.PostedOn descending
                  select p)
                  .Skip(pageNo * pageSize).Take(pageSize);
@@ -194,6 +194,40 @@ namespace Articles.Core
 
             tag_instance = db.Tags.FirstOrDefault(t => t.UrlSlug.Equals(tagSlug));
             return tag_instance;
+        }
+
+        public Post Post(int year, int month, string titleSlug)
+        {
+             Post post = null;
+            try
+            {
+                post = db.Posts.SingleOrDefault(p => p.PostedOn.Year == year && p.PostedOn.Month == month && p.UrlSlug.Equals(titleSlug));
+                
+            }
+            catch (InvalidOperationException)
+            {
+                throw new InvalidOperationException("Post selection failed due to title and date-published duplication");
+            }
+            return post;
+
+           
+        }
+
+
+        public IList<Category> Categories()
+        {
+            List<Category> categories = new List<Category>();
+            IEnumerable<Category> c_query =
+                from c in db.Categories
+                orderby c.Name
+                select c;
+
+            foreach (Category category in c_query)
+            {
+                categories.Add(category);
+            }
+
+            return categories; 
         }
     }
 }

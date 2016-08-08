@@ -46,7 +46,7 @@ namespace Articles.Migrations
             second_seed_category.UrlSlug = "seed_two";
             context.Categories.AddOrUpdate(second_seed_category);
 
-            /*
+            
             Post seed_post = new Post();
             seed_post.Title = "seed post title";
             seed_post.ShortDescription = "<p> this is a short description which is put in between p tag identifiers<p>";
@@ -78,7 +78,7 @@ namespace Articles.Migrations
             seed_post4.UrlSlug = "seed_post4";
             seed_post4.PostedOn = DateTime.Now;
             seed_post4.Category = seed_cat;
-            */
+            
 
             Post seed_post5 = new Post();
             seed_post5.Title = "5 a post for a separate category";
@@ -92,7 +92,7 @@ namespace Articles.Migrations
             IList<Tag> tagg = new List<Tag>();
             tagg.Add(seed_tag);
             tagg.Add(seed_tag_2);
-            /*  seed_post.Tags = tagg;
+              seed_post.Tags = tagg;
               seed_post2.Tags = tagg;
               seed_post.Published = true;
               seed_post2.Published = true;
@@ -103,7 +103,7 @@ namespace Articles.Migrations
             seed_post3.Published = true;
             seed_post4.Published = true;
             context.Posts.AddOrUpdate(seed_post3);
-            context.Posts.AddOrUpdate(seed_post4); */
+            context.Posts.AddOrUpdate(seed_post4); 
             seed_post5.Tags = tagg;
             context.Posts.AddOrUpdate(seed_post5);
 
