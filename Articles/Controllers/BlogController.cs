@@ -13,6 +13,7 @@ namespace Articles.Controllers
 
         private readonly IBlogRepository _blogRepository;
 
+        //constructer for ninject dependency injection 
         public BlogController(IBlogRepository blogRepository)
         {
             _blogRepository = blogRepository;

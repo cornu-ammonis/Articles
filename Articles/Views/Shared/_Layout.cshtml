@@ -21,18 +21,19 @@
         <div id="header">
             <div id="logo">
                 <div id="logo_text">
-                    <h1><a href="/">Just<span class="logo_colour">Blog</span></a></h1>
-                    <h2>Writings, Experiments and More...</h2>
+                    <h1><a href="/">Demo<span class="logo_colour">Blog</span></a></h1>
+                    <h2>description here</h2>
                 </div>
             </div>
 
             <!-- Navigation -->
             <div id="menubar">
                 <ul id="menu">
-                    <li>@Html.ActionLink("Posts", "Posts")</li>
+                    <li>@Html.ActionLink("Posts", "Posts", new {controller = "Blog" })</li>
                     <li><a href="#">Contact</a></li>
                     <li><a href="#">About Me</a></li>
                 </ul>
+                @Html.Partial("_LoginPartial")
             </div>
 
         </div>
@@ -43,13 +44,21 @@
             @RenderBody()
 
             <!--calls a 'child action' which creates a widget view model and returns the sidebar partial view given the model-->
-            @Html.Action("Sidebars")
+           @if (@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().Equals("Blog"))
+           {
+
+               @Html.Action("Sidebars")
+           }
+
+             
         </div>
 
         <!-- Footer -->
         <div id="footer">
-            Copyright ï¿½ @DateTime.Now.Year JustBlog All Rights Reserved
+            @DateTime.Now.Year 
         </div>
     </div>
 </body>
 </html>
+
+@RenderSection("scripts", required: false)

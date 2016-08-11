@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Articles.Models;
+using Articles.Controllers;
+using Articles.Core;
 
 namespace Articles.Controllers
 {
@@ -21,6 +23,16 @@ namespace Articles.Controllers
         public AccountController()
         {
         }
+
+        /*
+        [ChildActionOnly]
+        public PartialViewResult Sidebars()
+        {
+            BlogRepository rep = new BlogRepository(new ApplicationDbContext());
+
+            BlogController blog = new BlogController(rep);
+            return blog.Sidebars();
+        } */
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {

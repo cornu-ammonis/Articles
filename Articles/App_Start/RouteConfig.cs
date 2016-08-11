@@ -13,11 +13,17 @@ namespace Articles
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            //  routes.MapRoute(
-            //     name: "Default",
-            //    url: "{controller}/{action}/{id}",
-            //    defaults: new { controller = "Blog", action = "Posts", id = UrlParameter.Optional }
-            //  );
+            
+
+
+
+                        routes.MapRoute(
+                            name: "Default",
+                            url: "{controller}/{action}/{id}",
+                            defaults: new { controller = "Blog", action = "Posts", id = UrlParameter.Optional }
+                          ); 
+
+
 
             routes.MapRoute(
     "Category",
@@ -42,7 +48,10 @@ namespace Articles
        "Action",
        "{action}",
        new { controller = "Blog", action = "Posts" }
-     ); 
+     );
+
+            
+
         }
     }
 }

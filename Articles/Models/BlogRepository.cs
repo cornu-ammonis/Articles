@@ -14,6 +14,7 @@ namespace Articles.Core
 
         public ApplicationDbContext db;
 
+        // ninject constructor 
         public BlogRepository(ApplicationDbContext database)
         {
             db = database;
@@ -183,6 +184,7 @@ namespace Articles.Core
                 category_instance = category;
             } */
 
+            // ** implementation without loop 
             category_instance = db.Categories.FirstOrDefault(c => c.UrlSlug.Equals(categorySlug));
 
             return category_instance;

@@ -1,0 +1,16 @@
+to do: 
+- to config local time is hard coded and needs to be dynamic 
+- collapse total post repository methods into the post retrieval query methods to avoid looping twice 
+
+
+functionality list:
+
+recent posts 
+categories 
+tags
+search
+comments
+social media plugins
+image embedding
+archive links 
+moderated account creation 
