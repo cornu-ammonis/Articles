@@ -32,14 +32,19 @@
                     <li>@Html.ActionLink("Posts", "Posts", new {controller = "Blog" })</li>
                     <li><a href="#">Contact</a></li>
                     <li><a href="#">About Me</a></li>
+                   
+                    @Html.MvcSiteMap().SiteMapPath()
                 </ul>
                 @Html.Partial("_LoginPartial")
+                
+
             </div>
 
         </div>
 
         <!-- Site Content -->
         <div id="site_content">
+            
             @Html.Partial("_Search")
             @RenderBody()
 

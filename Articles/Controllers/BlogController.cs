@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MvcSiteMapProvider;
+using MvcSiteMapProvider.Web.Mvc.Filters;
 
 namespace Articles.Controllers
 {
@@ -62,10 +64,14 @@ namespace Articles.Controllers
             return View("List", viewModel);
         }
 
+       
+        //[SiteMapTitle("Category.Name", Target = AttributeTarget.ParentNode)]
+        
 
-        public ViewResult Post(int year, int month, string title)
+        public ViewResult Post(int year, int month, string ti)
         {
-            var post = _blogRepository.Post(year, month, title);
+            var post = _blogRepository.Post(year, month, ti);
+            
 
             if (post == null)
                 throw new HttpException(404, "post not found");
