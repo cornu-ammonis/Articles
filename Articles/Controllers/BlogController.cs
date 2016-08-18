@@ -42,7 +42,7 @@ namespace Articles.Controllers
             ViewBag.Title = String.Format(@"{0} posts on category ""{1}""", viewModel.TotalPosts,
                         viewModel.Category.Name);
 
-            return View("list", viewModel);
+            return View("List", viewModel);
         }
 
         public ViewResult Tag(string tag, int p = 1)

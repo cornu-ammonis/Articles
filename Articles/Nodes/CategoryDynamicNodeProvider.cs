@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Articles.Core;
+using Articles.Models;
 
-namespace Articles.Models
+namespace Articles.Nodes
 {
     public class CategoryDynamicNodeProvider : DynamicNodeProviderBase
     {

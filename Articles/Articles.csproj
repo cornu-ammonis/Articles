@@ -243,14 +243,16 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BlogRepository.cs" />
-    <Compile Include="Models\CategoryDynamicNodeProvider.cs" />
+    <Compile Include="Nodes\CategoryDynamicNodeProvider.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ListViewModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\PostDynamicNodeProvider.cs" />
+    <Compile Include="Nodes\PostDynamicNodeProvider.cs" />
     <Compile Include="Models\RepositoryModule.cs" />
     <Compile Include="Models\WidgetViewModel.cs" />
+    <Compile Include="Nodes\PostTagDynamicNodeProvider.cs" />
+    <Compile Include="Nodes\TagDynamicNodeProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

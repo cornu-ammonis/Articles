@@ -1,11 +1,12 @@
 ﻿using Articles.Core;
+using Articles.Models;
 using MvcSiteMapProvider;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Articles.Models
+namespace Articles.Nodes
 {
     public class PostDynamicNodeProvider : DynamicNodeProviderBase
     {
