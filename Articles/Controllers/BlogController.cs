@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MvcSiteMapProvider;
+using MvcSiteMapProvider.Web.Mvc.Filters;
 
 namespace Articles.Controllers
 {
@@ -40,7 +42,7 @@ namespace Articles.Controllers
             ViewBag.Title = String.Format(@"{0} posts on category ""{1}""", viewModel.TotalPosts,
                         viewModel.Category.Name);
 
-            return View("list", viewModel);
+            return View("List", viewModel);
         }
 
         public ViewResult Tag(string tag, int p = 1)
@@ -62,10 +64,14 @@ namespace Articles.Controllers
             return View("List", viewModel);
         }
 
+       
+        //[SiteMapTitle("Category.Name", Target = AttributeTarget.ParentNode)]
+        
 
-        public ViewResult Post(int year, int month, string title)
+        public ViewResult Post(int year, int month, string ti)
         {
-            var post = _blogRepository.Post(year, month, title);
+            var post = _blogRepository.Post(year, month, ti);
+            
 
             if (post == null)
                 throw new HttpException(404, "post not found");

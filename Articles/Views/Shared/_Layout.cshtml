@@ -12,6 +12,8 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" type="text/css"
           href="@Url.Content("~/Content/themes/simple/style.css")" />
+
+    
 </head>
 
 <body>
@@ -26,20 +28,34 @@
                 </div>
             </div>
 
+            <div id="login-div">
+                @Html.Partial("_LoginPartial")
+            </div>
             <!-- Navigation -->
             <div id="menubar">
                 <ul id="menu">
                     <li>@Html.ActionLink("Posts", "Posts", new {controller = "Blog" })</li>
                     <li><a href="#">Contact</a></li>
                     <li><a href="#">About Me</a></li>
+                   
+                   
                 </ul>
-                @Html.Partial("_LoginPartial")
+               
+                
+
+            </div>
+
+            
+
+            <div id="breadcrumbs">
+               
             </div>
 
         </div>
 
         <!-- Site Content -->
         <div id="site_content">
+            @Html.MvcSiteMap().SiteMapPath()
             @Html.Partial("_Search")
             @RenderBody()
 

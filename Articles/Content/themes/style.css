@@ -412,3 +412,57 @@ div.feeddiv {
   text-align: center;
   width: 200px;
 }
+
+body 
+{ font-family: "lucida sans", arial, sans-serif; 
+  font-size: 9pt; 
+  background-color: #EEE7CD;
+}
+
+#login-div {
+    float:right;
+}
+#login-div form
+{ width: 500px; 
+  margin: 50px auto; }
+
+#login-div form legend
+{ font-size: 12pt; }
+
+#login-div form label
+{ display: inline-block; width: 100px; }
+
+span.field-validation-error
+{ color: red; }
+
+#login-div form input[type="submit"]
+{ margin-left: 200px; }
+
+.validation-summary-errors
+{ text-align: center; color: red; }
+
+div#tab-posts {
+  overflow: scroll;
+}
+
+@media (min-width: 768px) {
+  .navbar-nav {
+    float: left;
+    margin: 0;
+  }
+  .navbar-nav > li {
+    float: left;
+  }
+  .navbar-nav > li > a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar-left {
+    float: left !important;
+  }
+  .navbar-right {
+    float: right !important;
+  }

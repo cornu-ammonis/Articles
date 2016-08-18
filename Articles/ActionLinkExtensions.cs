@@ -17,7 +17,7 @@ namespace Articles
                 {
                     year = post.PostedOn.Year,
                     month = post.PostedOn.Month,
-                    title = post.UrlSlug
+                    ti = post.UrlSlug
                 },
                 new
                 {

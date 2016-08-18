@@ -12,7 +12,7 @@ namespace Articles.Models
         {
             Categories = blogRepository.Categories();
             Tags = blogRepository.Tags();
-            Posts = blogRepository.Posts(0, 5);
+            Posts = blogRepository.Posts(0, 10);
         }
 
         public IList<Category> Categories { get; private set; }
