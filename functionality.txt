@@ -1,0 +1,17 @@
+to do: 
+- to config local time is hard coded and needs to be dynamic 
+- collapse total post repository methods into the post retrieval query methods to avoid looping twice 
+- breadcrumbs with tags do not persist when you select a post. add functionality to "remember" how a user got to a post?
+
+
+functionality list:
+
+recent posts 
+categories 
+tags
+search
+comments
+social media plugins
+image embedding
+archive links 
+moderated account creation 

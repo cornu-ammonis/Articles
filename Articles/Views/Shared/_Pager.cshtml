@@ -17,7 +17,7 @@
     var p = string.Format("p={0}", currentPage - 1);
     var n = string.Format("p={0}", currentPage + 1);
 
-    @* If the view is rendered for "search" action append the pagination value with "&" *@
+    @* If the view is rendered for "search", "tag", or "category" action append the pagination value with "&" *@
 
 if (ViewContext.RouteData.Values["action"].ToString()
   .Equals("search", StringComparison.OrdinalIgnoreCase))
@@ -25,6 +25,18 @@ if (ViewContext.RouteData.Values["action"].ToString()
     var s = String.Format("?s={0}", ViewContext.RequestContext.HttpContext.Request.QueryString["s"]);
     p = String.Format("{0}&{1}", s, p);
     n = String.Format("{0}&{1}", s, n);
+}
+else if (ViewContext.RouteData.Values["action"].ToString().Equals("tag", StringComparison.OrdinalIgnoreCase))
+{
+    var t = String.Format("?tag={0}", ViewContext.RequestContext.HttpContext.Request.QueryString["tag"]);
+    p = String.Format("{0}&{1}", t, p);
+    n = String.Format("{0}&{1}", t, n);
+}
+else if (ViewContext.RouteData.Values["action"].ToString().Equals("category", StringComparison.OrdinalIgnoreCase))
+{
+    var t = String.Format("?category={0}", ViewContext.RequestContext.HttpContext.Request.QueryString["category"]);
+    p = String.Format("{0}&{1}", t, p);
+    n = String.Format("{0}&{1}", t, n);
 }
 else
 {

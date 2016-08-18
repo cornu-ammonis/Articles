@@ -14,6 +14,12 @@ using Articles.Models;
 
 namespace Articles
 {
+
+
+
+
+
+
     public class EmailService : IIdentityMessageService
     {
         public Task SendAsync(IdentityMessage message)
@@ -106,4 +112,41 @@ namespace Articles
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
         }
     }
+
+
+
+    /*public class MyDbInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
+    {
+        protected override void Seed(ApplicationDbContext context)
+        {
+            InitializeIdentityForEF(context)
+            base.Seed(context);
+        }
+
+        private void InitializeIdentityForEF(ApplicationDbContext context)
+        {
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            string name = "Admin";
+            string password = "P@ssword1";
+
+            if(!RoleManager.RoleExists(name))
+            {
+                var roleresult = RoleManager.Create(new IdentityRole(name));
+
+            }
+
+            var user = new ApplicationUser();
+            user.UserName = name;
+            user.Email = "admin@test.com";
+            var adminresult = UserManager.Create(user, password);
+
+            if(adminresult.Succeeded)
+            {
+                var result = UserManager.AddToRole(user.Id, name);
+            }
+
+            context.SaveChanges();
+        }
+    } */
 }

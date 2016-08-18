@@ -14,12 +14,12 @@ namespace Articles.Models
             TotalPosts = _blogRepository.TotalPosts();
         }
 
-        public ListViewModel(IBlogRepository blogRepository, string categorySlug, int p)
+      /*  public ListViewModel(IBlogRepository blogRepository, string categorySlug, int p)
         {
             Posts = blogRepository.PostsForCategory(categorySlug, p - 1, 10);
             TotalPosts = blogRepository.TotalPostsForCategory(categorySlug);
             Category = blogRepository.Category(categorySlug);
-        }
+        } */
 
         public ListViewModel(IBlogRepository blogRepository, string text, string type, int p)
         {
@@ -30,10 +30,15 @@ namespace Articles.Models
                     TotalPosts = blogRepository.TotalPostsForTag(text);
                     Tag = blogRepository.Tag(text);
                     break;
-                default:
+                case "Category":
                     Posts = blogRepository.PostsForCategory(text, p - 1, 10);
                     TotalPosts = blogRepository.TotalPostsForCategory(text);
                     Category = blogRepository.Category(text);
+                    break;
+                case "Search":
+                    Posts = blogRepository.PostsForSearch(text, p - 1, 10);
+                    TotalPosts = blogRepository.TotalPostsForSearch(text);
+                    Search = text;
                 break;
                
             }
@@ -44,6 +49,8 @@ namespace Articles.Models
         public int TotalPosts { get; private set; }
         public Category Category { get; private set; }
         public Tag Tag { get; private set; }
+        public string Search { get; private set; }
+
 
     }
 }

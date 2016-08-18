@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MvcSiteMapProvider;
+using MvcSiteMapProvider.Web.Mvc.Filters;
 
 namespace Articles.Controllers
 {
@@ -13,6 +15,7 @@ namespace Articles.Controllers
 
         private readonly IBlogRepository _blogRepository;
 
+        //constructer for ninject dependency injection 
         public BlogController(IBlogRepository blogRepository)
         {
             _blogRepository = blogRepository;
@@ -39,7 +42,7 @@ namespace Articles.Controllers
             ViewBag.Title = String.Format(@"{0} posts on category ""{1}""", viewModel.TotalPosts,
                         viewModel.Category.Name);
 
-            return View("list", viewModel);
+            return View("List", viewModel);
         }
 
         public ViewResult Tag(string tag, int p = 1)
@@ -51,6 +54,40 @@ namespace Articles.Controllers
             ViewBag.Title = String.Format(@"{0} posts tagged ""{1}""", viewModel.TotalPosts, viewModel.Tag.Name);
 
             return View("List", viewModel);
+        }
+
+        public ViewResult Search(string s, int p = 1)
+        {
+            var viewModel = new ListViewModel(_blogRepository, s, "Search", p);
+
+            ViewBag.Title = String.Format(@"{0} posts found for search ""{1}""", viewModel.TotalPosts, s);
+            return View("List", viewModel);
+        }
+
+       
+        //[SiteMapTitle("Category.Name", Target = AttributeTarget.ParentNode)]
+        
+
+        public ViewResult Post(int year, int month, string ti)
+        {
+            var post = _blogRepository.Post(year, month, ti);
+            
+
+            if (post == null)
+                throw new HttpException(404, "post not found");
+
+            if (post.Published == false && User.Identity.IsAuthenticated == false)
+                throw new HttpException(401, "The post is not published");
+
+            return View(post);
+        }
+
+        [ChildActionOnly]
+        public PartialViewResult Sidebars()
+        {
+            var widgetViewModel = new WidgetViewModel(_blogRepository);
+
+            return PartialView("_Sidebars", widgetViewModel);
         }
 
         // GET: Blog
