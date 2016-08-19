@@ -101,12 +101,12 @@ namespace Articles.Core
             return posts;
         }
 
-        public int TotalPosts()
+        public int TotalPosts(bool checkIsPublished = true)
         {
             int total = 0;
             IEnumerable<Post> p_query =
                 from p in db.Posts
-                where p.Published == true
+                where !checkIsPublished || p.Published == true
                 select p;
 
             foreach (Post post in p_query)
@@ -125,6 +125,8 @@ namespace Articles.Core
                 from p in db.Posts
                 where p.Published == true && p.Category.UrlSlug.Equals(categorySlug)
                 select p;
+
+            
 
             foreach (Post post in p_query)
             {
@@ -195,6 +197,9 @@ namespace Articles.Core
             Tag tag_instance = null;
 
             tag_instance = db.Tags.FirstOrDefault(t => t.UrlSlug.Equals(tagSlug));
+
+           
+            
             return tag_instance;
         }
 
@@ -247,5 +252,172 @@ namespace Articles.Core
 
             return tags;
         }
+
+
+        public IList<Post> Posts(int pageNo, int pageSize, string sortColumn, bool sortByAscending)
+        {
+            IList<Post> posts = new List<Post>();
+           
+
+            switch(sortColumn)
+            {
+                case "Title":
+                    if (sortByAscending)
+                    {
+                        IEnumerable<Post> q_posts = (from p in db.Posts
+                                                    orderby p.Title
+                                                    select p)
+                                                   .Include("Category")
+                                                   .Skip(pageNo * pageSize)
+                                                   .Take(pageSize);
+                        foreach(Post post in q_posts)
+                        {
+                            posts.Add(post);
+                        }
+
+                    }
+                    else
+                    {
+                        IEnumerable<Post> q_posts = (from p in db.Posts
+                                                    orderby p.Title descending
+                                                    select p)
+                                                   .Include("Category")
+                                                   .Skip(pageNo * pageSize)
+                                                   .Take(pageSize);
+                        foreach (Post post in q_posts)
+                        {
+                            posts.Add(post);
+                        }
+                    }
+                    break;
+                case "Published":
+                    if(sortByAscending)
+                    {
+                        IEnumerable<Post> q_posts = (from p in db.Posts
+                                                    orderby p.Published
+                                                    select p)
+                                                   .Include("Category")
+                                                   .Skip(pageNo * pageSize)
+                                                   .Take(pageSize);
+                        foreach (Post post in q_posts)
+                        {
+                            posts.Add(post);
+                        }
+                    }
+                    else
+                    {
+                        IEnumerable<Post> q_posts = (from p in db.Posts
+                                                    orderby p.Published descending
+                                                    select p)
+                                                   .Include("Category")
+                                                   .Skip(pageNo * pageSize)
+                                                   .Take(pageSize);
+                        foreach (Post post in q_posts)
+                        {
+                            posts.Add(post);
+                        }
+                    }
+                    break;
+                case "PostedOn":
+                    
+                        if(sortByAscending)
+                        {
+                            IEnumerable<Post> q_posts = (from p in db.Posts
+                                                        orderby p.PostedOn
+                                                        select p)
+                                                   .Include("Category")
+                                                   .Skip(pageNo * pageSize)
+                                                   .Take(pageSize);
+                            foreach (Post post in q_posts)
+                            {
+                                posts.Add(post);
+                            }
+                        }
+                        else
+                        {
+                            IEnumerable<Post> q_posts = (from p in db.Posts
+                                                        orderby p.PostedOn descending
+                                                        select p)
+                                                   .Include("Category")
+                                                   .Skip(pageNo * pageSize)
+                                                   .Take(pageSize);
+                            foreach (Post post in q_posts)
+                            {
+                                posts.Add(post);
+                            }
+                        }
+                    break;
+                case "Modified": 
+                    if(sortByAscending)
+                    {
+                        IEnumerable<Post> q_posts = (from p in db.Posts
+                                                    orderby p.Modified
+                                                    select p)
+                                                   .Include("Category")
+                                                   .Skip(pageNo * pageSize)
+                                                   .Take(pageSize);
+                        foreach (Post post in q_posts)
+                        {
+                            posts.Add(post);
+                        }
+                    }
+                    else
+                    {
+                        IEnumerable<Post> q_posts = (from p in db.Posts
+                                                    orderby p.Modified descending
+                                                    select p)
+                                                   .Include("Category")
+                                                   .Skip(pageNo * pageSize)
+                                                   .Take(pageSize);
+                        foreach (Post post in q_posts)
+                        {
+                            posts.Add(post);
+                        }
+                    }
+                    break;
+                case "Category":
+                    if(sortByAscending)
+                    {
+                        IEnumerable<Post> q_posts = (from p in db.Posts
+                                                    orderby p.Category.Name
+                                                    select p)
+                                                   .Include("Category")
+                                                   .Skip(pageNo * pageSize)
+                                                   .Take(pageSize);
+                        foreach (Post post in q_posts)
+                        {
+                            posts.Add(post);
+                        }
+                    }
+                    else
+                    {
+                        IEnumerable<Post> q_posts = (from p in db.Posts
+                                                    orderby p.Category.Name descending
+                                                    select p)
+                                                   .Include("Category")
+                                                   .Skip(pageNo * pageSize)
+                                                   .Take(pageSize);
+                        foreach (Post post in q_posts)
+                        {
+                            posts.Add(post);
+                        }
+                    }
+                    break;
+                default:
+                    IEnumerable<Post> qposts = (from p in db.Posts
+                                                orderby p.PostedOn descending
+                                                select p)
+                                                   .Include("Category")
+                                                   .Skip(pageNo * pageSize)
+                                                   .Take(pageSize);
+                    foreach (Post post in qposts)
+                    {
+                        posts.Add(post);
+                    }
+                   break; 
+            }
+            return posts;
+        }
+
     }
 }
